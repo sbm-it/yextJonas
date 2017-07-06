@@ -1,7 +1,36 @@
 console.log('yext.js loaded :-)')
 
-lala = [1,2,3,4,5]
 
-x.onkeyup=y.onkeyup=function(evt){
-    z.textContent=parseFloat(x.value)+parseFloat(y.value)
+// if the silly addition example is still there
+if(!!typeof(x)&&!!typeof(y)&&!!typeof(z)){
+    x.onkeyup=y.onkeyup=function(evt){
+        z.textContent=parseFloat(x.value)+parseFloat(y.value)
+    }
+}
+
+yext=function(){} // ini
+
+// populate div if there
+yext.div0=document.getElementById('yextDiv')
+
+if(yext.div0){
+    yext.div = document.createElement('div')
+    yext.div0.appendChild(yext.div)
+    var h = 'yext API call: <input id="urlInput" style="color:blue" size=100><br><button id="callButton" type="button" class="btn btn-primary">Call</button> <button id="demoButton" type="button" class="btn btn-success">Demo</button>'
+    h += '<pre id="JSONresponse" hidden=true></pre>'
+    yext.div.innerHTML=h
+    // Demo API call
+    demoButton.onclick=function(){
+        urlInput.value='https://api.yext.com/v2/accounts/[accountId]/locations?api_key=API_KEY&v='+new Date().toISOString().slice(0,10).replace(/-/g,'')
+    }
+    callButton.onclick=function(){
+        var url = 'https://script.google.com/macros/s/AKfycbxH_t0MnnzTDvWnGKwpyIJUkJJqpuBOiZjwnerTgtGLsONojZg/exec?url='+encodeURIComponent(urlInput.value)
+        JSONresponse.hidden=false
+        JSONresponse.innerHTML='<span style="color:red">calling ...</span>'
+        $.getScript(url+'&callback=yext.callback')
+    }
+    yext.callback=function(x){
+        JSONresponse.innerHTML=JSON.stringify(x,null,3)
+        yext.callResponse=x
+    }
 }

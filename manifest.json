@@ -1,12 +1,6 @@
 {
  "name": "Yext",
  "display": "fullscreen",
- "icons": [
-  {
-   "src": "icon-48x48.png",
-   "sizes": "48x48",
-   "type": "image\/png",
-   "density": "1.0"
-  }
+ "icons": {"48": "icon-48x48.png"}
  ]
 }

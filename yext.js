@@ -26,10 +26,16 @@ if(yext.div0){
     }
     callButton.onclick=function(){
         var url = 'https://script.google.com/macros/s/AKfycbxH_t0MnnzTDvWnGKwpyIJUkJJqpuBOiZjwnerTgtGLsONojZg/exec?url='+encodeURIComponent(urlInput.value)
-        apiURL.innerHTML='<a href="'+url+'" target="_blank">'+url+'</a> <br><span style="color:green">(you can control the callback function by adding "&callback=your_call_back_function")</a>'
+        apiURL.innerHTML='<a href="'+url+'" target="_blank">'+url+'</a> <br><span id="copyHiddenInput" style="color:blue;background-color:yellow;cursor:pointer"><i class="fa fa-files-o" aria-hidden="true"></i>copy</span><span style="color:green"> (you can control the callback function by adding "&callback=your_call_back_function")</a><input id="hiddenUrl" value="'+url+'" hidden=true>'
         JSONresponse.hidden=false
         JSONresponse.innerHTML='<span style="color:red">calling ...</span>'
         $.getScript(url+'&callback=yext.callback')
+        copyHiddenInput.onclick=function(){
+            hiddenUrl.hidden=false // show it only long enough to copy its value
+            hiddenUrl.select()
+            document.execCommand('copy')
+            hiddenUrl.hidden=true
+        }
     }
     yext.callback=function(x){
         JSONresponse.innerHTML=JSON.stringify(x,null,3)

@@ -35,6 +35,12 @@ if(yext.div0){
             hiddenUrl.select()
             document.execCommand('copy')
             hiddenUrl.hidden=true
+            copyHiddenInput.style.color="red"
+            copyHiddenInput.innerHTML='<i class="fa fa-files-o" aria-hidden="true"></i>copied to clipboard'
+            setTimeout(function(){
+                copyHiddenInput.style.color="blue"
+                copyHiddenInput.innerHTML='<i class="fa fa-files-o" aria-hidden="true"></i>copy'
+            },1000)
         }
     }
     yext.callback=function(x){

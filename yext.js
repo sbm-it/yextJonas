@@ -16,7 +16,8 @@ yext.div0=document.getElementById('yextDiv')
 if(yext.div0){
     yext.div = document.createElement('div')
     yext.div0.appendChild(yext.div)
-    var h = 'yext API call: <input id="urlInput" style="color:blue" size=100><br><button id="callButton" type="button" class="btn btn-primary">Call</button> <button id="demoButton" type="button" class="btn btn-success">Demo</button>'
+    var h = 'yext API call: <br><input id="urlInput" style="color:blue" size=100><br><button id="callButton" type="button" class="btn btn-primary">Call</button> <button id="demoButton" type="button" class="btn btn-success">Demo</button>'
+    h += '<p id="apiURL"></p>'
     h += '<pre id="JSONresponse" hidden=true></pre>'
     yext.div.innerHTML=h
     // Demo API call
@@ -25,6 +26,7 @@ if(yext.div0){
     }
     callButton.onclick=function(){
         var url = 'https://script.google.com/macros/s/AKfycbxH_t0MnnzTDvWnGKwpyIJUkJJqpuBOiZjwnerTgtGLsONojZg/exec?url='+encodeURIComponent(urlInput.value)
+        apiURL.innerHTML='<a href="'+url+'" target="_blank">'+url+'</a> <br><span style="color:green">(you can control the callback function by adding "&callback=your_call_back_function")</a>'
         JSONresponse.hidden=false
         JSONresponse.innerHTML='<span style="color:red">calling ...</span>'
         $.getScript(url+'&callback=yext.callback')
